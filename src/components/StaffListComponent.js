@@ -18,7 +18,12 @@ class StaffList extends Component {
 
         })
         return (
-            <div className="row">{staffs}</div>
+            <div>
+                <div className="row">
+                {staffs}
+                </div>
+                <p>Bấm vào tên nhân viên để xem thông tin.</p>
+            </div>
         )
     }
 }
