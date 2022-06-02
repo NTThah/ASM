@@ -9,7 +9,7 @@ class StaffList extends Component {
         const staffs = this.props.
         staffs.map((staff) => {
             return (
-                <div>
+                <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2">
                     <Card key={staff.id}>
                         <CardTitle>{staff.name}</CardTitle>
                     </Card>
@@ -18,7 +18,7 @@ class StaffList extends Component {
 
         })
         return (
-            <div>{staffs}</div>
+            <div className="row">{staffs}</div>
         )
     }
 }
