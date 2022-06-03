@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardImg, CardImgOverlay, 
+    CardText, 
     CardTitle } from 'reactstrap';
 
 
@@ -21,7 +22,8 @@ class StaffList extends Component {
             return (
                 <Card>
                     <CardBody>
-                        <CardTitle>{staff.name}</CardTitle>
+                        <CardTitle>Họ tên: {staff.name}</CardTitle>
+                        <CardText>Ngày sinh: {staff.doB}</CardText>
                     </CardBody>
                 </Card>
             )
