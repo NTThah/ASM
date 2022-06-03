@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardImg, CardImgOverlay, 
     CardText, 
     CardTitle } from 'reactstrap';
-
+import dateFormat from 'dateformat';
 
 class StaffList extends Component {
     
@@ -23,8 +23,8 @@ class StaffList extends Component {
                 <Card>
                     <CardBody>
                         <CardTitle>Họ tên: {staff.name}</CardTitle>
-                        <CardText>Ngày sinh: {staff.doB}</CardText>
-                        <CardText>Ngày vào công ty: {staff.startDate}</CardText>
+                        <CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText>
+                        <CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText>
                         <CardText>Phòng ban: {staff.department.name}</CardText>
                         <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
                         <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
@@ -44,7 +44,9 @@ class StaffList extends Component {
             return (
                 <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2">
                     <Card key={staff.id} onClick={() => this.onSelectedStaff(staff)} >
-                        <CardTitle>{staff.name}</CardTitle>
+                        <CardBody>
+                            <CardTitle>{staff.name}</CardTitle>
+                        </CardBody>
                     </Card>
                 </div>
             );
