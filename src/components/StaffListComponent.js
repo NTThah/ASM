@@ -10,6 +10,7 @@ class StaffList extends Component {
         super(props);
         this.state={
             selectedStaff: null,
+            colum: "col-12 col-md-6 col-lg-4 mt-2 mb-2",
         }
     }
 
@@ -17,7 +18,21 @@ class StaffList extends Component {
         this.setState({selectedStaff: staff})
         this.props.onCloseText();
     }
-   
+    twoColum = () => {
+        this.setState({
+            colum: "col-12 col-md-6 col-lg-6 mt-2 mb-2"
+        })
+    }
+    threeColum = () => {
+        this.setState({
+            colum: "col-12 col-md-6 col-lg-4 mt-2 mb-2"
+        })
+    }
+    sixColum = () => {
+        this.setState({
+            colum: "col-12 col-md-6 col-lg-2 mt-2 mb-2"
+        })
+    }
     renderStaffDetail(staff) {
         if (staff != null) {
             return (
@@ -40,11 +55,12 @@ class StaffList extends Component {
 
 
     render() {
+        const colum = this.state.colum;
         const staffs = this.props
         .staffs.map((staff) => {
             return (
-                <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2">
-                    <Card key={staff.id} onClick={() => this.onSelectedStaff(staff)} >
+                <div className={colum}>
+                    <Card key={staff.id} onClick={() => this.onSelectedStaff(staff)} className="border border-dark">
                         <CardBody>
                             <CardTitle>{staff.name}</CardTitle>
                         </CardBody>
@@ -55,11 +71,14 @@ class StaffList extends Component {
         })
         return (
             <div>
+                <button type="button" className='btn btn-danger m-3' onClick={this.twoColum}>2 colum</button>
+                <button type="button" className='btn btn-danger m-3' onClick={this.threeColum}>3 colum</button>
+                <button type="button" className='btn btn-danger m-3' onClick={this.sixColum}>6 colum</button>
                 <div className="row">
                 {staffs}
                 </div>
                 <div className="row">
-                    <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2">
+                    <div className={colum}>
                         {this.renderStaffDetail(this.state.selectedStaff)}
                     </div>
                 </div>
