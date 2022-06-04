@@ -41,8 +41,6 @@ class StaffList extends Component {
 
 
     render() {
-        const closeText = this.state;
-        const elmText = closeText ? "" : "";
         const staffs = this.props
         .staffs.map((staff) => {
             return (
@@ -61,8 +59,6 @@ class StaffList extends Component {
                 <div className="row">
                 {staffs}
                 </div>
-                
-                {elmText}
                 <div className="row">
                     <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2">
                         {this.renderStaffDetail(this.state.selectedStaff)}
