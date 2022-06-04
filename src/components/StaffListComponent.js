@@ -9,14 +9,16 @@ class StaffList extends Component {
     constructor(props){
         super(props);
         this.state={
-            selectedStaff: null
+            selectedStaff: null,
+            closeText: true
         }
     }
 
     onSelectedStaff(staff) {
         this.setState({selectedStaff: staff})
-        console.log(this.state)
+        this.props.onCloseText();
     }
+   
     renderStaffDetail(staff) {
         if (staff != null) {
             return (
@@ -39,6 +41,8 @@ class StaffList extends Component {
 
 
     render() {
+        const closeText = this.state;
+        const elmText = closeText ? "" : "";
         const staffs = this.props
         .staffs.map((staff) => {
             return (
@@ -57,9 +61,12 @@ class StaffList extends Component {
                 <div className="row">
                 {staffs}
                 </div>
-                <p>Bấm vào tên nhân viên để xem thông tin.</p>
-                <div>
-                    {this.renderStaffDetail(this.state.selectedStaff)}
+                
+                {elmText}
+                <div className="row">
+                    <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2">
+                        {this.renderStaffDetail(this.state.selectedStaff)}
+                    </div>
                 </div>
             </div>
         )
