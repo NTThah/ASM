@@ -10,7 +10,6 @@ class StaffList extends Component {
         super(props);
         this.state={
             selectedStaff: null,
-            closeText: true
         }
     }
 
