@@ -16,7 +16,6 @@ class StaffList extends Component {
 
     onSelectedStaff(staff) {
         this.setState({selectedStaff: staff})
-        this.props.onCloseText();
     }
     twoColum = () => {
         this.setState({
