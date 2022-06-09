@@ -4,86 +4,41 @@ import { Card, CardBody, CardImg, CardImgOverlay,
     CardTitle } from 'reactstrap';
 import dateFormat from 'dateformat';
 
-class StaffList extends Component {
-    
-    constructor(props){
-        super(props);
-        this.state={
-            selectedStaff: null,
-            colum: "col-12 col-md-6 col-lg-4 mt-2 mb-2",
-        }
-    }
+const RenderStaffDetail = ({staff}) => {
+    return (
+        <Card>
+            <CardBody className="row">
+              <div className="col-12 col-md-4 col-lg-3 mt-2 mb-2">
+                <CardImg width="100%" src={staff.image} alt={staff.name} />
+              </div>
+              <div className="col-12 col-md-8 col-lg-9 mt-2 mb-2">
+                <CardTitle>Họ và tên: {staff.name}</CardTitle>
+                <CardText>
+                  Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
+                </CardText>
+                <CardText>
+                  Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
+                </CardText>
+                <CardText>Phòng ban: {staff.department.name}</CardText>
+                <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
+                <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+              </div>
+            </CardBody>
+         </Card>
+    )
+}
 
-    onSelectedStaff(staff) {
-        this.setState({selectedStaff: staff})
-    }
-    twoColum = () => {
-        this.setState({
-            colum: "col-12 col-md-6 col-lg-6 mt-2 mb-2"
-        })
-    }
-    threeColum = () => {
-        this.setState({
-            colum: "col-12 col-md-6 col-lg-4 mt-2 mb-2"
-        })
-    }
-    sixColum = () => {
-        this.setState({
-            colum: "col-12 col-md-6 col-lg-2 mt-2 mb-2"
-        })
-    }
-    renderStaffDetail(staff) {
-        if (staff != null) {
-            return (
-                <Card>
-                    <CardBody>
-                        <CardTitle>Họ tên: {staff.name}</CardTitle>
-                        <CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText>
-                        <CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText>
-                        <CardText>Phòng ban: {staff.department.name}</CardText>
-                        <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
-                        <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
-                    </CardBody>
-                </Card>
-            )
-        }
-        else {
-            return <div></div>
-        }
-    }
-
-
-    render() {
-        const colum = this.state.colum;
-        const staffs = this.props
-        .staffs.map((staff) => {
-            return (
-                <div className={colum}>
-                    <Card key={staff.id} onClick={() => this.onSelectedStaff(staff)} className="border border-dark">
-                        <CardBody>
-                            <CardTitle>{staff.name}</CardTitle>
-                        </CardBody>
-                    </Card>
-                </div>
-            );
-
-        })
+const  StaffList = (props) => {
         return (
-            <div>
-                <button type="button" className='btn btn-danger m-3' onClick={this.twoColum}>2 colum</button>
-                <button type="button" className='btn btn-danger m-3' onClick={this.threeColum}>3 colum</button>
-                <button type="button" className='btn btn-danger m-3' onClick={this.sixColum}>6 colum</button>
-                <div className="row">
-                {staffs}
-                </div>
-                <div className="row">
-                    <div className={colum}>
-                        {this.renderStaffDetail(this.state.selectedStaff)}
+            <div className='container'>
+                <div>
+                    <div>
+                        <RenderStaffDetail staff={props.staff} />
                     </div>
                 </div>
             </div>
         )
-    }
+
 }
 
 export default StaffList;

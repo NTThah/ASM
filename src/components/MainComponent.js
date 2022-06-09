@@ -15,15 +15,18 @@ class Main extends Component {
 
     }
   }
-  
   render() {
-  
+    const StaffWithId = ({match}) => {
+      return (
+        <StaffList staff={this.state.staffs.filter((staff) => staff.id === parseInt(match.params.staffId,10))[0]} />
+      )
+    }
     return (
       <div >
             <Header />
             <Switch>
-                {/* <Route exact path='/nhanvien' component={ () => <StaffList staffs={this.state.staffs} />}/> */}
                 <Route exact path='/nhanvien' component={() => <Menu staffs={this.state.staffs}/>} />
+                <Route exact path='/nhanvien/:staffId' component={StaffWithId} />
             </Switch>
             <Footer />
       </div>
