@@ -8,6 +8,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Menu from './MenuComponent';
 import Department from './DepartmentComponent';
+import Slary from './SlaryComponent';
 class Main extends Component {
   constructor(props){
     super(props);
@@ -29,6 +30,7 @@ class Main extends Component {
                 <Route exact path='/nhanvien' component={() => <Menu staffs={this.state.staffs}/>} />
                 <Route exact path='/nhanvien/:staffId' component={StaffWithId} />
                 <Route exact path='/phongban' component={() => <Department departments={this.state.departments}/>} />
+                <Route exact path='/bangluong' component={() => <Slary staffs={this.state.staffs}/>} />
             </Switch>
             <Footer />
       </div>
