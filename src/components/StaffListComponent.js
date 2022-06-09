@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardImg, CardImgOverlay, 
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardImgOverlay, 
     CardText, 
     CardTitle } from 'reactstrap';
 import dateFormat from 'dateformat';
+import { Link } from 'react-router-dom';
 
 const RenderStaffDetail = ({staff}) => {
     return (
@@ -31,10 +32,17 @@ const RenderStaffDetail = ({staff}) => {
 const  StaffList = (props) => {
         return (
             <div className='container'>
+                <div className='row'>
+                    <Breadcrumb className="ml-3">
+                        <BreadcrumbItem>
+                            <Link to='/nhanvien'>Nhân viên</Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <hr />
+                </div>
                 <div>
-                    <div>
-                        <RenderStaffDetail staff={props.staff} />
-                    </div>
+                    <RenderStaffDetail staff={props.staff} />
                 </div>
             </div>
         )
