@@ -3,7 +3,7 @@ import { Card, CardBody, CardImg, CardText } from "reactstrap";
 
 const RenderSlary = ({slary}) => {
     return (
-        <Card>
+        <Card className="border-dark">
             <CardBody>
                 <Card className="row  flex-row">
                     <CardImg src={slary.image} className="col-6"/>
@@ -29,8 +29,10 @@ const Slary = (props) => {
         )
     })
     return (
+        <div className="container">
+            <div className="row">{slary}</div>
 
-        <div>{slary}</div>
+        </div>
     )
 }
 
