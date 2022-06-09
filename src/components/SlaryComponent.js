@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardBody, CardImg, CardText } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText } from "reactstrap";
 
 const RenderSlary = ({slary}) => {
     return (
@@ -7,7 +8,7 @@ const RenderSlary = ({slary}) => {
             <CardBody>
                 <Card className="row  flex-row">
                     <CardImg src={slary.image} className="col-6"/>
-                    <h6 className="col-6 text-center">{slary.name}</h6>
+                    <h5 className="col-6 text-center">{slary.name}</h5>
                 </Card>
                 <CardText>Mã nhân viên: {slary.id}</CardText>
                         <CardText>Hệ số lương: {slary.salaryScale}</CardText>
@@ -30,6 +31,14 @@ const Slary = (props) => {
     })
     return (
         <div className="container">
+            <div className="row">
+                <Breadcrumb className="ml-3">
+                    <BreadcrumbItem>
+                        <Link to="/nhanvien">Nhân viên</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem>Bảng lương</BreadcrumbItem>
+                </Breadcrumb>
+            </div>
             <div className="row">{slary}</div>
 
         </div>
