@@ -36,7 +36,7 @@ const Slary = (props) => {
                     <BreadcrumbItem>
                         <Link to="/nhanvien">Nhân viên</Link>
                     </BreadcrumbItem>
-                    <BreadcrumbItem>Bảng lương</BreadcrumbItem>
+                    <BreadcrumbItem active>Bảng lương</BreadcrumbItem>
                 </Breadcrumb>
             </div>
             <div className="row">{slary}</div>
