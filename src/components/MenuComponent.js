@@ -17,8 +17,30 @@ const RenderMenuItem = ({ staff }) => {
 };
 
 class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyword: "",
+    };
+  }
+  onSearch = (keyword) => {
+    this.setState({
+      keyword: keyword,
+    });
+    // console.log(keyword);
+  };
   render() {
-    const staffs = this.props.staffs.map((staff) => {
+    const { keyword } = this.state;
+    let staffsList = this.props.staffs;
+    let staffsFilter = [];
+    if (keyword) {
+      staffsFilter = staffsList.filter((staff) => {
+        return staff.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+      });
+    } else {
+      staffsFilter = staffsList;
+    }
+    const staffs = staffsFilter.map((staff) => {
       return (
         <div key={staff.id} className="col-12 col-md-6 col-lg-2 mt-2 mb-2">
           <RenderMenuItem staff={staff} />
@@ -32,7 +54,7 @@ class Menu extends Component {
             <h2 className="ml-3 mt-3">Nhân viên</h2>
           </div>
           <div className="col-6">
-            <SearchStaff />
+            <SearchStaff onSearch={this.onSearch} />
           </div>
         </div>
         <hr className=" mb-3" />

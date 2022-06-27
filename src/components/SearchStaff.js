@@ -7,14 +7,35 @@ class SearchStaff extends Component {
       keyword: "",
     };
   }
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+  onSearch = () => {
+    this.props.onSearch(this.state.keyword);
+  };
   render() {
     return (
       <div className="row">
         <div className="input-group col-10">
-          <input type="text" className="form-control" name="keyword" />
+          <input
+            type="text"
+            className="form-control"
+            name="keyword"
+            value={this.state.keyword}
+            onChange={this.onChange}
+          />
         </div>
         <span className="input-group-btn col-2">
-          <button type="button" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.onSearch}
+          >
             Tìm
           </button>
         </span>
