@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Input } from "reactstrap";
+import AddNewStaff from "./AddNewStaff";
 import SearchStaff from "./SearchStaff";
 
 const RenderMenuItem = ({ staff }) => {
@@ -21,6 +22,7 @@ class Menu extends Component {
     super(props);
     this.state = {
       keyword: "",
+      isDisplayForm: false,
     };
   }
   onSearch = (keyword) => {
@@ -29,8 +31,13 @@ class Menu extends Component {
     });
     // console.log(keyword);
   };
+  onToggleForm = () => {
+    this.setState({
+      isDisplayForm: !this.state.isDisplayForm,
+    });
+  };
   render() {
-    const { keyword } = this.state;
+    const { keyword, isDisplayForm } = this.state;
     let staffsList = this.props.staffs;
     let staffsFilter = [];
     if (keyword) {
@@ -47,12 +54,23 @@ class Menu extends Component {
         </div>
       );
     });
+    const AddStaff = isDisplayForm ? <AddNewStaff /> : "";
     return (
       <div className="container">
         <div className="row">
-          <div className="col-6">
+          <div className="col-2">
             <h2 className="ml-3 mt-3">Nhân viên</h2>
           </div>
+          <div className="col-4 mt-3">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={this.onToggleForm}
+            >
+              <span className="fa fa-plus mr-2"></span>Thêm Nhân viên
+            </button>
+          </div>
+          <div>{AddStaff}</div>
           <div className="col-6">
             <SearchStaff onSearch={this.onSearch} />
           </div>
