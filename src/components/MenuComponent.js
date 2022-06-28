@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardImg, CardTitle } from "reactstrap";
+import { Card, CardImg, CardTitle, Input } from "reactstrap";
 import SearchStaff from "./SearchStaff";
 
 const RenderMenuItem = ({ staff }) => {

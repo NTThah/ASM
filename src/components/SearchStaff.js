@@ -20,7 +20,7 @@ class SearchStaff extends Component {
   };
   render() {
     return (
-      <div className="row">
+      <div className="row mt-3">
         <div className="input-group col-10">
           <input
             type="text"
@@ -30,7 +30,7 @@ class SearchStaff extends Component {
             onChange={this.onChange}
           />
         </div>
-        <span className="input-group-btn col-2">
+        <span className="input-group-btn">
           <button
             type="button"
             className="btn btn-primary"
