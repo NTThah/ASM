@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardImg, CardTitle, Input } from "reactstrap";
+import { Card, CardImg, CardTitle } from "reactstrap";
 import AddNewStaff from "./AddNewStaff";
 import SearchStaff from "./SearchStaff";
 
@@ -22,7 +22,7 @@ class Menu extends Component {
     super(props);
     this.state = {
       keyword: "",
-      isDisplayForm: false,
+      isModalOpen: false,
     };
   }
   onSearch = (keyword) => {
@@ -31,13 +31,17 @@ class Menu extends Component {
     });
     // console.log(keyword);
   };
-  onToggleForm = () => {
+
+  toggleModal = () => {
     this.setState({
-      isDisplayForm: !this.state.isDisplayForm,
+      isModalOpen: !this.state.isModalOpen,
     });
   };
+  onSubmit = (data) => {
+    console.log(data);
+  };
   render() {
-    const { keyword, isDisplayForm } = this.state;
+    const { keyword, isModalOpen } = this.state;
     let staffsList = this.props.staffs;
     let staffsFilter = [];
     if (keyword) {
@@ -54,7 +58,11 @@ class Menu extends Component {
         </div>
       );
     });
-    const AddStaff = isDisplayForm ? <AddNewStaff /> : "";
+    const AddStaff = isModalOpen ? (
+      <AddNewStaff isOpenModal={this.toggleModal} onSubmit={this.onSubmit} />
+    ) : (
+      ""
+    );
     return (
       <div className="container">
         <div className="row">
@@ -65,7 +73,7 @@ class Menu extends Component {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={this.onToggleForm}
+              onClick={this.toggleModal}
             >
               <span className="fa fa-plus mr-2"></span>Thêm Nhân viên
             </button>

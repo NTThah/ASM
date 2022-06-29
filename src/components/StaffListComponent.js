@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
   Card,
   CardBody,
   CardImg,
-  CardImgOverlay,
   CardText,
   CardTitle,
 } from "reactstrap";
