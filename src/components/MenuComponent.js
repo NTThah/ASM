@@ -37,9 +37,7 @@ class Menu extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   };
-  onSubmit = (data) => {
-    console.log(data);
-  };
+
   render() {
     const { keyword, isModalOpen } = this.state;
     let staffsList = this.props.staffs;
@@ -59,7 +57,10 @@ class Menu extends Component {
       );
     });
     const AddStaff = isModalOpen ? (
-      <AddNewStaff isOpenModal={this.toggleModal} onSubmit={this.onSubmit} />
+      <AddNewStaff
+        isOpenModal={this.toggleModal}
+        onSubmit={this.props.onSubmit}
+      />
     ) : (
       ""
     );

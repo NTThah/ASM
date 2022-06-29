@@ -119,8 +119,10 @@ class AddNewStaff extends Component {
                     className="form-control"
                   >
                     <option>Sale</option>
-                    <option>IT</option>
                     <option>HR</option>
+                    <option>Marketing</option>
+                    <option>IT</option>
+                    <option>Finance</option>
                   </Control.select>
                 </Col>
               </Row>

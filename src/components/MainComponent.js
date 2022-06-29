@@ -17,6 +17,16 @@ class Main extends Component {
       departments: DEPARTMENTS,
     };
   }
+  onSubmit = (data) => {
+    console.log(data);
+    let staffs = this.state.staffs;
+    data.id = staffs.length + 1;
+    console.log(staffs.length);
+    staffs.push(data);
+    this.setState({
+      staffs: staffs,
+    });
+  };
   render() {
     const StaffWithId = ({ match }) => {
       return (
@@ -36,7 +46,9 @@ class Main extends Component {
           <Route
             exact
             path="/nhanvien"
-            component={() => <Menu staffs={this.state.staffs} />}
+            component={() => (
+              <Menu staffs={this.state.staffs} onSubmit={this.onSubmit} />
+            )}
           />
           <Route exact path="/nhanvien/:staffId" component={StaffWithId} />
           <Route
