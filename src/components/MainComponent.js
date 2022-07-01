@@ -18,13 +18,16 @@ class Main extends Component {
     };
   }
   onSubmit = (data) => {
+    console.log(data);
     let { staffs, departments } = this.state;
     data.id = staffs.length;
     data.department = departments.filter(
       (department) => department.id === data.department
     )[0];
+    console.log(data.department);
     staffs.push(data);
-    data.department.numberOfStaff = data.department.numberOfStaff + 1;
+    data.department.numberOfStaff++;
+
     this.setState({
       staffs: staffs,
     });

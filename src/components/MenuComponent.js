@@ -68,7 +68,7 @@ class Menu extends Component {
       <div className="container">
         <div className="row">
           <div className="col-2">
-            <h2 className="ml-3 mt-3">Nhân viên</h2>
+            <h2 className="mt-3">Nhân viên</h2>
           </div>
           <div className="col-4 mt-3">
             <button

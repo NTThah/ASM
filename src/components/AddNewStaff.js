@@ -7,24 +7,48 @@ import {
   ModalBody,
   Label,
   Button,
+  Form,
+  FormGroup,
+  Input,
+  FormFeedback,
 } from "reactstrap";
-import { Control, LocalForm } from "react-redux-form";
+// import { Control, LocalForm, Errors } from "react-redux-form";
+
 class AddNewStaff extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       id: "",
       name: "",
       doB: "",
       salaryScale: "",
       startDate: "",
-      department: "",
+      department: "Dept01",
       annualLeave: "",
       overTime: "",
       salary: "",
       image: "/assets/images/alberto.png",
+      touched: {
+        doB: false,
+        name: false,
+        startDate: false,
+      },
     };
+  }
+  validate(name, doB, startDate) {
+    const errors = {
+      name: "",
+      doB: "",
+      startDate: "",
+    };
+    if (this.state.touched.name && name.length < 3) {
+      errors.name = "Yêu cầu nhập hơn 2 ký tự";
+    } else if (this.state.touched.name && name.length > 30)
+      errors.name = "Yêu cầu nhập ít hơn 30 ký tự";
+    if (this.state.touched.doB && doB.length < 3) errors.doB = "Yêu cầu nhập";
+    if (this.state.touched.startDate && startDate.length < 3)
+      errors.startDate = "Yêu cầu nhập";
+    return errors;
   }
   isOpenModal = () => {
     this.props.isOpenModal();
@@ -40,80 +64,100 @@ class AddNewStaff extends Component {
       [name]: value,
     });
   };
-  handleSubmit = () => {
-    this.props.onSubmit(this.state);
+  handleSubmit = (event) => {
+    if (
+      this.state.name === "" ||
+      this.state.doB === "" ||
+      this.state.startDate === ""
+    ) {
+      event.preventDefault();
+    } else {
+      this.props.onSubmit(this.state);
+      event.preventDefault();
+    }
+  };
+  handelBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
   };
   render() {
+    const errors = this.validate(
+      this.state.name,
+      this.state.doB,
+      this.state.startDate
+    );
     return (
       <div>
         <Modal isOpen={this.isOpenModal} toggle={this.toggleModal}>
-          <ModalHeader>
-            <Row>
-              <Col md={10}>
-                <h3 className="panel-title">Thêm Nhân viên</h3>
-              </Col>
-              <Col md={2}>
-                <span className="fa fa-times-circle text-right ml-5"></span>
-              </Col>
-            </Row>
-          </ModalHeader>
-          <ModalBody onSubmit={this.handleSubmit}>
-            <LocalForm>
-              <Row className="form-group">
+          <ModalHeader toggle={this.toggleModal}>Thêm Nhân viên</ModalHeader>
+          <ModalBody>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup className="row">
                 <Label htmlFor="name" md={4}>
                   Họ tên
                 </Label>
                 <Col md={8}>
-                  <Control.text
-                    model=".name"
+                  <Input
+                    type="text"
                     id="name"
                     name="name"
                     placeholder="Họ và tên"
                     className="form-control"
+                    onBlur={this.handelBlur("name")}
+                    valid={errors.name === ""}
+                    invalid={errors.name !== ""}
                     value={this.state.name}
                     onChange={this.onChange}
                   />
+                  <FormFeedback>{errors.name}</FormFeedback>
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Label htmlFor="doB" md={4}>
                   Ngày sinh
                 </Label>
                 <Col md={8}>
-                  <Control.text
+                  <Input
                     type="date"
-                    model=".doB"
                     id="doB"
                     name="doB"
                     placeholder="dd/mm/yyyy"
                     className="form-control"
+                    onBlur={this.handelBlur("doB")}
+                    valid={errors.doB === ""}
+                    invalid={errors.doB !== ""}
                     value={this.state.doB}
                     onChange={this.onChange}
                   />
+                  <FormFeedback>{errors.doB}</FormFeedback>
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Label htmlFor="startDate" md={4}>
                   Ngày vào công ty
                 </Label>
                 <Col md={8}>
-                  <Control.text
+                  <Input
                     type="date"
-                    model=".startDate"
                     id="startDate"
                     name="startDate"
                     placeholder="dd/mm/yyyy"
                     className="form-control"
+                    onBlur={this.handelBlur("startDate")}
+                    valid={errors.startDate === ""}
+                    invalid={errors.startDate !== ""}
                     value={this.state.startDate}
                     onChange={this.onChange}
                   />
+                  <FormFeedback>{errors.startDate}</FormFeedback>
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Label md={4}>Phòng ban</Label>
                 <Col md={8}>
-                  <Control.select
-                    model=".department"
+                  <Input
+                    type="select"
                     id="department"
                     name="department"
                     className="form-control"
@@ -124,17 +168,16 @@ class AddNewStaff extends Component {
                     <option value="Dept03">Marketing</option>
                     <option value="Dept04">IT</option>
                     <option value="Dept05">Finance</option>
-                  </Control.select>
+                  </Input>
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Label htmlFor="salaryScale" md={4}>
                   Hệ số lương
                 </Label>
                 <Col md={8}>
-                  <Control.text
+                  <Input
                     type="number"
-                    model=".salaryScale"
                     id="salaryScale"
                     name="salaryScale"
                     placeholder="1"
@@ -143,15 +186,14 @@ class AddNewStaff extends Component {
                     onChange={this.onChange}
                   />
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Label htmlFor="annualLeave" md={4}>
                   Số ngày nghỉ còn lại
                 </Label>
                 <Col md={8}>
-                  <Control.text
+                  <Input
                     type="number"
-                    model=".annualLeave"
                     id="annualLeave"
                     name="annualLeave"
                     placeholder="0"
@@ -160,13 +202,13 @@ class AddNewStaff extends Component {
                     onChange={this.onChange}
                   />
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Label htmlFor="overTime" md={4}>
                   Số ngày đã làm thêm
                 </Label>
                 <Col md={8}>
-                  <Control.text
+                  <Input
                     type="number"
                     model=".overTime"
                     id="overTime"
@@ -177,15 +219,15 @@ class AddNewStaff extends Component {
                     onChange={this.onChange}
                   />
                 </Col>
-              </Row>
-              <Row className="form-group">
+              </FormGroup>
+              <FormGroup className="row">
                 <Col md={{ size: 10, offset: 2 }}>
                   <Button type="submit" color="primary">
                     Thêm
                   </Button>
                 </Col>
-              </Row>
-            </LocalForm>
+              </FormGroup>
+            </Form>
           </ModalBody>
         </Modal>
       </div>
